@@ -37,7 +37,7 @@ namespace QuizHub.Server.Actions.Coupons {
 
             await DB.UpdateBalanceAsync(userId, -discount["price"]);
 
-            return new JsonObject {["coupon"] = coupon};
+            return new JsonObject(Json.Ok()) {["coupon"] = coupon};
         }
     }
 }
