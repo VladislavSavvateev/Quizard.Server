@@ -90,7 +90,8 @@ namespace QuizHub.Server {
                 return;
             }
 
-            var file = new FileInfo(Path.Join(storageDir.FullName, url.AbsolutePath));
+            var file = new FileInfo(Path.Join(storageDir.FullName,
+                url.AbsolutePath == "/" ? "/index.html" : url.AbsolutePath));
 
             if (!file.Exists) {
                 Answer.Code(context, 404);
