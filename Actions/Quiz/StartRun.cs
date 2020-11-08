@@ -15,7 +15,7 @@ namespace QuizHub.Server.Actions.Quiz {
         public override async Task<JsonObject> DoWork(Server server, HttpListenerContext context, JsonObject json) {
             var userId = await VerifyVk.Verify(json, context);
             
-            /*var com = await DB.CommandAsync(Consts.SELECT_LAST_RUN);
+            var com = await DB.CommandAsync(Consts.SELECT_LAST_RUN);
 
             try {
                 com.Parameters.Add(Consts.QUIZ_ID, MySqlDbType.UInt64).Value = (ulong) json["quizId"];
@@ -26,9 +26,9 @@ namespace QuizHub.Server.Actions.Quiz {
                 if (await reader.ReadAsync())
                     if (DateTime.Now.Subtract(reader.GetDateTime(3)).TotalSeconds < Consts.COOLDOWN_DURATION)
                         throw new Ex08_CooldownException();
-            } finally { await com.Connection.CloseAsync(); }*/
+            } finally { await com.Connection.CloseAsync(); }
 
-            var com = await DB.CommandAsync(Consts.SELECT_QUESTIONS);
+            com = await DB.CommandAsync(Consts.SELECT_QUESTIONS);
 
             try {
                 com.Parameters.Add(Consts.QUIZ_ID, MySqlDbType.UInt64).Value = (ulong) json["quizId"];

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using QuizHub.Server.Exceptions;
 using QuizHub.Server.Util;
 
 namespace QuizHub.Server.Actions.Quiz {
@@ -15,7 +16,7 @@ namespace QuizHub.Server.Actions.Quiz {
         public override async Task<JsonObject> DoWork(Server server, HttpListenerContext context, JsonObject json) {
             var userId = await VerifyVk.Verify(json, context); 
             
-            /*var com = await DB.CommandAsync(Consts.SELECT_LAST_RUN);
+            var com = await DB.CommandAsync(Consts.SELECT_LAST_RUN);
 
             try {
                 com.Parameters.Add(Consts.QUIZ_ID, MySqlDbType.UInt64).Value = (ulong) json["quizId"];
@@ -26,7 +27,7 @@ namespace QuizHub.Server.Actions.Quiz {
                 if (await reader.ReadAsync())
                     if (DateTime.Now.Subtract(reader.GetDateTime(3)).TotalSeconds < Consts.COOLDOWN_DURATION)
                         throw new Ex08_CooldownException();
-            } finally { await com.Connection.CloseAsync(); }*/
+            } finally { await com.Connection.CloseAsync(); }
 
             var answersFromJson = (JsonArray) json["answers"];
             var answersFromDb = await DB.GetRightAnswersFromQuizAsync(json["quizId"], userId);
@@ -44,7 +45,7 @@ namespace QuizHub.Server.Actions.Quiz {
                 if (answerFromDb["right"] && !answerFromDb["wasAnsweredRight"]) points += answerFromDb["points"];
             }
 
-            var com = await DB.CommandAsync(Consts.INSERT_NEW_RUN);
+            com = await DB.CommandAsync(Consts.INSERT_NEW_RUN);
 
             long runId;
 
