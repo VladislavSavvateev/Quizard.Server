@@ -40,6 +40,7 @@ namespace QuizHub.Server.Actions.Admin.Quizzes {
                         ((JsonArray) question["options"]).ToString();
                     com.Parameters.Add(Consts.ANSWER, MySqlDbType.JSON).Value =
                         new JsonObject {["answer"] = question["answer"]}.ToString();
+                    com.Parameters.Add(Consts.TYPE, MySqlDbType.Int32).Value = (int) question["type"];
 
                     com.ExecuteNonQuery();
                 } finally { await com.Connection.CloseAsync(); }

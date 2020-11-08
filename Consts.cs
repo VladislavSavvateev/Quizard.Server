@@ -27,6 +27,7 @@ namespace QuizHub.Server {
         public const string COUPON = "@Coupon";
         public const string COUPON_ID = "@CouponId";
         public const string DESCRIPTION = "@Description";
+        public const string TYPE = "@Type";
 
         public const string SELECT_CATEGORIES = "SELECT id, name, img_url FROM categories;";
         public const string SELECT_CATEGORY_BY_ID = "SELECT id, name, img_url FROM categories WHERE id = @Id LIMIT 1;";
@@ -46,7 +47,7 @@ namespace QuizHub.Server {
 
         public const string INSERT_NEW_CATEGORY = "INSERT INTO categories(name) VALUES (@Name);";
         public const string INSERT_NEW_QUIZ = "INSERT INTO quizes(title, category_id, difficulty) VALUES (@Title, @CategoryId, @Difficulty);";
-        public const string INSERT_NEW_QUESTION = "INSERT INTO questions(quiz_id, text, points, options, answer) VALUES(@QuizId, @Text, @Points, @Options, @Answer);";
+        public const string INSERT_NEW_QUESTION = "INSERT INTO questions(quiz_id, text, points, options, answer, type) VALUES(@QuizId, @Text, @Points, @Options, @Answer, @Type);";
         public const string INSERT_NEW_RUN = "INSERT INTO runs(vk_id, quiz_id) VALUES(@VkId, @QuizId);";
         public const string INSERT_NEW_ANSWER = "INSERT INTO answers(run_id, answer, question_id, is_it_right) VALUES(@RunId, @Answer, @QuestionId, @IsItRight);";
         public const string INSERT_NEW_BALANCE = "INSERT INTO balances(vk_id, balance) VALUES(@VkId, @Balance);";
