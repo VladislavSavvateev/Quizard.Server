@@ -1,11 +1,11 @@
-﻿using System.Json;
+﻿// #define SUPPORT_BYPASS_CHECKS
+
+using System.Json;
 using System.Net;
 using System.Threading.Tasks;
 using QuizHub.Server.Exceptions;
 
 namespace QuizHub.Server.Util {
-    //#define SUPPORT_BYPASS_CHECKS
-    
     public static class VerifyVk {
         public static async Task<long> Verify(JsonObject thing, HttpListenerContext context) {
             var ip = context.Request.Headers["X-Real-IP"];
